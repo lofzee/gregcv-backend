@@ -1,8 +1,4 @@
-provider "aws" {
-  region = "eu-west-2"
-}
-
-/*- resource "aws_iam_role" "iam_for_lambda" {
+ resource "aws_iam_role" "iam_for_lambda" {
   name = "iam_for_lambda"
 
   assume_role_policy = <<EOF
@@ -21,13 +17,13 @@ provider "aws" {
     }
 EOF
 }
-*/
+
 
 locals {
   s3_origin_id = "gregstephens.s3.eu-west-2.amazonaws.com"
 }
 
-/*resource "aws_s3_bucket" "importeds3bucket" {
+resource "aws_s3_bucket" "importeds3bucket" {
   acceleration_status = null
   bucket              = "gregstephens"
   bucket_prefix       = null
@@ -86,9 +82,10 @@ locals {
     enabled    = false
     mfa_delete = false
   }
-*/
+}
 
-/*resource "aws_cloudfront_distribution" "s3distribution1" {
+
+resource "aws_cloudfront_distribution" "s3distribution1" {
   aliases = [
     "cv.gregstephens.co.uk",
   ]
@@ -154,7 +151,7 @@ locals {
     ssl_support_method             = "sni-only"
   }
 }
-*/
+
 
 data "archive_file" "zip" {
   type        = "zip"
@@ -163,7 +160,7 @@ data "archive_file" "zip" {
 
 }
 
-/* resource "aws_lambda_function" "lambdafunction_gregcv" {
+ resource "aws_lambda_function" "lambdafunction_gregcv" {
   architectures = [
     "x86_64",
   ]
@@ -202,7 +199,7 @@ data "archive_file" "zip" {
     mode = "PassThrough"
   }
 }
-*/
+
 
 resource "aws_lambda_function_url" "lambdafunction_url1" {
   authorization_type = "NONE"
