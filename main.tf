@@ -337,40 +337,4 @@ resource "aws_route53_zone" "r53hostedzone" {
 
 
 
-resource "aws_s3_bucket" "terraform_state_s3bucket" {
-    bucket = "greg-tf-state"
-    versioning {
-      enabled = true
-    }
 
-    tags = {
-      Name = "greg-tf-state-bucket"
-      environment = "prod"
-    }
-
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "AES256"
-      }
-    }
-  }
-}
-
-resource "aws_dynamodb_table" "terraform_state_dyndb_table" {
-  name = "greg-terraform-dyndb-table"
-  billing_mode = "PAY_PER_REQUEST"
-
-    attribute {
-      name = "LockID"
-      type = "S"
-    }
-
-    hash_key = "LockID"
-
-    tags = {
-      name = "greg-terraform-dyndb-table"
-      environment = "prod"
-    }
-
-}
